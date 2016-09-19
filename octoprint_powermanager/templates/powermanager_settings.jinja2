@@ -1,27 +1,28 @@
 <form class="form-horizontal">
     <div class="control-group">
-	<h2>Power GPIO Pin</h2>
+	<b>Power GPIO Pin</b><br>
 	This GPIO pin/relay controls whether or not the PC PSU is "active" or not.  The Pi is always powered by the +5Vsb pin which is always on regardless of whether or not the power supply is providing +12V.<br>
         <label class="control-label">{{ _('Power GPIO Pin') }}</label>
         <div class="controls">
             <input type="text" class="input-block-level" data-bind="value: settings.plugins.powermanager.powergpiopin">
         </div><br>
-        <h2>Fan GPIO Pin</h2>
-	This GPIO pin/relay controls whether or not the print head fan is on "NORMAL" or "BYPASS" mode.  In NORMAL mode, the fan receives power from the printer's controller and operates without interference.  In BYPASS mode, the fan receives +12V from the power supply and isolates it from the controller board.  This causes the fan to run at 100% power as long as the relay is in BYPASS mode to cool the print head down quickly.<br>
-	<label class="control-label">{{_('Fan GPIO Pin') }}</label>
+        <b>Light  GPIO Pin</b><br>
+	This GPIO pin/relay controls the lights.<br>
+	<label class="control-label">{{_('Light GPIO Pin') }}</label>
 	<div class="controls">
-	    <input type="text" class="input-block-level" data-bind="value: settings.plugins.powermanager.fangpiopin">
+	    <input type="text" class="input-block-level" data-bind="value: settings.plugins.powermanager.lightgpiopin">
 	</div><br>
-	<h2>Printer GPIO Pin</h2>
+	<b>Printer GPIO Pin</b><br>
 	This GPIO pin/relay controls whether or ot the printer should receive +12V power.  This requires that the Power GPIO Pin be "On" in order for the power supply to generate the required +12V.  This is used to power down the printer in the event of a failure, but continue to supply power to the printhead fan.<br>
 	<label class="control-label">{{_('Printer GPIO Pin') }}</label>
 	<div class="controls">
 	    <input type="text" class="input-block-level" data-bind="value: settings.plugins.powermanager.printergpiopin">
 	</div><br>
-	<h2>Invert GPIO Pins</h2>
+	<b>Invert GPIO Pins</b><br>
 	Some relay boards require the GPIO pin be brought LOW to engage the relay while others require the GPIO pin be brought HIGH. If your relay board requires the pins to be brought low (sometimes called active-low) then check the below box.  If your relay board requires the pins brought high, then leave this box unchecked.<br>
 	<label class="control-label">{{_('Invert GPIO Pins') }} </label>
 	<div class="controls">
-	    <input type="checkbox" class="input-block-level" data-bind="checked:settings.plugins.powermanager.invertgpiopins">
+	    <input type="checkbox" class="input-block-level" data-bind="checked: settings.plugins.powermanager.invertgpiopins">
+	</div>
     </div>
 </form>
