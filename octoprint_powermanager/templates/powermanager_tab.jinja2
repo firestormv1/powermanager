@@ -1,0 +1,53 @@
+<!-- Source for initial code and concept: https://github.com/docdawning/Illuminatrix/blob/master/Illuminatrix-octoprint-plugin/octoprint_illuminatrix/templates/illuminatrix_tab.jinja2 -->
+<div style="padding:5px;">
+	<!--<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"> </script>-->
+	<script>	
+		function callApi(request) {
+			console.log("Powermanager received command:"+request);
+			var apiPrefix = "/plugin/powermanager/";
+			$.get(apiPrefix + request);
+		}
+	</script>
+
+	<!-- Thankfully liberated from http://www.graemeboy.com/css-buttons -->
+	<style type="text/css"> 
+	input {
+		-webkit-box-shadow:rgba(0,0,0,0.0.1) 0 1px 0 0;
+		-moz-box-shadow:rgba(0,0,0,0.0.1) 0 1px 0 0;
+		box-shadow:rgba(0,0,0,0.0.1) 0 1px 0 0;
+		background-color:#A4A4A4;
+		border:1px solid #29447E;
+		font-family:'Lucida Grande',Tahoma,Verdana,Arial,sans-serif;
+		font-size:12px;
+		font-weight:700;
+		padding:6px 6px;
+		color:#fff;
+		border-radius:5px;
+		-moz-border-radius:3px;
+		-webkit-border-radius:3px;
+	}
+	input:hover {
+		background-color:	#D8D8D8;
+	}
+	</style>
+
+
+	<h3>Power Control Options</h3>
+	<div>
+		<h4>Power Supply</h4>
+		<input type="submit" value="PSU ON" onclick="callApi('psuon');">
+		<input type="submit" value="PSU OFF" onclick="callApi('psuoff');">
+	</div>
+	
+	<div>
+		<h4>Printer</h4>
+		<input type="submit" value="Printer On" onclick="callApi('printeron');">
+		<input type="submit" value="Printer Off" onclick="callApi('printeroff');">
+	</div>
+	
+	<div>
+		<h4>Lights</h4>
+		<input type="submit" value="Lights On" onclick="callApi('lightson');">
+		<input type="submit" value="Lights Off" onclick="callApi('lightsoff');">
+	</div>
+</div>

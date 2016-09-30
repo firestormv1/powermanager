@@ -66,13 +66,13 @@ class PowerManagerPlugin(octoprint.plugin.StartupPlugin,
                 GPIO.setup(int(self.printergpiopin), GPIO.OUT, initial=self.OFF)
                 GPIO.output(int(self.lightgpiopin), self.ON)
 
-    #DEBUG - Delete me.
     def on_after_startup(self):
         self._logger.info("Octoprint Power Manager running.")
 
     #
     # BLUEPRINT PLUGIN - We will define our api endpoints and perform actions here.
-    #
+    # 
+    # Each button/action is mapped to its own endpoint to actually do something.
 
     #Lights On
     @octoprint.plugin.BlueprintPlugin.route("/lightson", methods=["GET"])
@@ -134,6 +134,15 @@ class PowerManagerPlugin(octoprint.plugin.StartupPlugin,
             self._logger.info("Printer disabled, GPIO pin undefined.")
         return flask.make_response("Printer Off.")
 
+    #Emergency Stop
+    @octoprint.plugin.BlueprintPlugin.route("/emergencystop", methods=["GET"])
+    def emergencystop(self):
+	if self.printergpiopin != "-1":
+            GPIO.output(int(self.printergpiopin),self.OFF)
+            self._logger.info("******** EMERGENCY STOP **********")
+        else:
+            self._logger.info("**** Emergency Stop called, but printer GPIO not configured! ****")
+        return flask.make_response("Emergency Stop has shut down the printer.")
 
 
 
@@ -141,12 +150,14 @@ class PowerManagerPlugin(octoprint.plugin.StartupPlugin,
 
 
 
+    # This is needed for some reason. TODO: Figure out what exactly this does.
+    #I think it's to control authenticated user access to the API endpoints.
     def is_blueprint_protected(self):
         return False
 
 
     #
-    # EVENTS - I can't figure out why the blueprint plugin doesn't work
+    # EVENTS -I'm putting this here for a new feature.
     #
     # Event handling disabled, for future development.
     def on_event(self, event, payload):
@@ -164,7 +175,7 @@ class PowerManagerPlugin(octoprint.plugin.StartupPlugin,
         GPIO.cleanup()
 
     #
-    # DEFAULT SETTINGS - Plugin defaults when started.
+    # DEFAULT SETTINGS - Plugin defaults when started for the first time.
     #
     def get_settings_defaults(self):
         return dict(
@@ -176,7 +187,7 @@ class PowerManagerPlugin(octoprint.plugin.StartupPlugin,
 
 
     #
-    # POPULATE VARS from settings
+    # POPULATE VARS from stored settings
     #
     def get_template_vars(self):
         return dict(
