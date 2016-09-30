@@ -61,18 +61,18 @@ Be aware that the interface board linked above requires INVERTED signalling (ava
 ## Troubleshooting
 **GPIO doesn't appear to work.**
 - Try manually executing the below commands as the 'pi' user:
-> gpio -g mode (some GPIO pin to test) output
-> gpio -g write (GPIO pin) 1   #relay should switch state.
-> gpio -g write (GPIO pin) 0   #relay should switch state
+> gpio -g mode (some GPIO pin to test) output  
+> gpio -g write (GPIO pin) 1   #relay should switch state.  
+> gpio -g write (GPIO pin) 0   #relay should switch state  
 
 - Ensure that Pi is part of the gpio group
-> groups   #gpio should be listed.
+> groups   #gpio should be listed.  
 
 - Check permissions on /dev/gpiomem
->stat /dev/gpiomem  #Should have permissions 0660 owned by root with group gpio.
+>stat /dev/gpiomem  #Should have permissions 0660 owned by root with group gpio.  
 
-** Buttons don't work.**
->tail -f ~/.octoprint/logs/octoprint.log
+**Buttons don't work.**
+>tail -f ~/.octoprint/logs/octoprint.log  
 Run that and start clicking buttons.  Look for "octoprint.plugins.powermanager" messages.  You should at least get some startup info when Octoprint starts and should get a message when a button is pressed.  This will tell you if it's an issue of  Octoprint not getting button click events, or if there's another issue like GPIOs not working.
 
 
