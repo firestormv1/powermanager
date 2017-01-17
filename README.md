@@ -18,10 +18,11 @@ This plugin was designed with two objectives in mind
 ## INSTALLATION
 In order to install this plugin into your existing octopi setup, perform the following commands (via SSH as pi)
 
-1. Install RPi.GPIO - sudo apt-get install python-dev python-rpi.gpio  
-2. Install this plugin - ~/oprint/bin/pip install https://github.com/firestormv1/powermanager/archive/master.zip  
-3. Set permissions on the GPIO device to allow non-root users to access it.  
-   (TODO: I need to find what I used to get it to work.)  
+~~1. Install RPi.GPIO - sudo apt-get install python-dev python-rpi.gpio~~
+~~2. Install this plugin - ~/oprint/bin/pip install https://github.com/firestormv1/powermanager/archive/master.zip~~
+~~3. Set permissions on the GPIO device to allow non-root users to access it.~~  
+    ~~(TODO: I need to find what I used to get it to work.)~~  
+1. Go to the Plugins section of Octoprint, and provide this github repo's URL to the installer.  Steps above are handled automatically. :)    
 4. Shutdown OctoPi and install hardware.  
 5. Install hardware, make note of GPIO pins. See GPIO under HARDWARE below.  PowerManager uses BCM designations for GPIO pins.
 6. Boot RasPi  
